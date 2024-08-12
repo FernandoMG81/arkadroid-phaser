@@ -1,0 +1,36 @@
+{
+    "type": "fromPhysicsEditor",
+    "isStatic": false,
+    "density": 0.8,
+    "restitution": 0.1,
+    "friction": 0.1,
+    "frictionAir": 0.001,
+    "frictionStatic": 0.5,
+    "collisionFilter": { "group": 0, "category": 1, "mask": 255 },
+    "label": "star_destroyer.png",
+    "fixtures": [
+      {
+        "label": "star_destroyer.png-fixture-0",
+        "isSensor": false,
+        "vertices": [
+          [
+            { "x": 117, "y": 36 },
+            { "x": 88, "y": 28 },
+            { "x": 88, "y": 6 },
+            { "x": 165, "y": 7 },
+            { "x": 165, "y": 24 },
+            { "x": 130, "y": 36 }
+          ],
+          [
+            { "x": 130, "y": 36 },
+            { "x": 165, "y": 46 },
+            { "x": 250, "y": 91 },
+            { "x": 136, "y": 236 },
+            { "x": 112, "y": 237 },
+            { "x": 2, "y": 92 },
+            { "x": 117, "y": 36 }
+          ]
+        ]
+      }
+    ]
+  }
