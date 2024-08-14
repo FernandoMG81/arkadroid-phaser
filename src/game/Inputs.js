@@ -1,69 +1,73 @@
 export class Inputs {
-  constructor(scene) {
-    this.relatedScene = scene;
+  constructor (scene) {
+    this.relatedScene = scene
   }
 
-  update() {
+  update () {
     if (this.relatedScene.keys.left.isDown && this.relatedScene.millenium.x > this.relatedScene.millenium.width / 2) {
-      this.relatedScene.millenium.setFrame(1);
+      this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
-        this.relatedScene.ball.x -= 10;
+        this.relatedScene.ball.x -= 10
       }
-      this.relatedScene.millenium.x -= 10;
+      this.relatedScene.millenium.x -= 10
     } else if (this.relatedScene.keys.right.isDown && this.relatedScene.millenium.x < this.relatedScene.game.config.width - this.relatedScene.millenium.width / 2) {
-      this.relatedScene.millenium.setFrame(1);
+      this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
-        this.relatedScene.ball.x += 10;
+        this.relatedScene.ball.x += 10
       }
-      this.relatedScene.millenium.x += 10;
+      this.relatedScene.millenium.x += 10
     } else {
-      this.relatedScene.millenium.setFrame(0);
+      this.relatedScene.millenium.setFrame(0)
     }
 
     if (this.relatedScene.keys.space.isDown) {
       if (this.relatedScene.ball.getData('glue')) {
-        this.releaseBall();
+        this.releaseBall()
       }
     }
 
     if (this.relatedScene.ball.y > this.relatedScene.game.config.height) {
-      this.handleLifeLoss();
+      this.handleLifeLoss()
     }
 
     if (this.relatedScene.scoreboard.getLives() === 0) {
-      this.relatedScene.scene.pause();
+      this.relatedScene.scene.pause()
+      this.relatedScene.soundLevel.stop()
       setTimeout(() => {
-        this.relatedScene.stopAllSounds();
-        this.relatedScene.scene.start('GameOver');
-      }, 3000);
+        this.relatedScene.scene.start('GameOver')
+      }, 3000)
     }
   }
 
-  releaseBall() {
-    this.relatedScene.ball.setData('glue', false);
-    this.relatedScene.ball.anims.play('ball_anim', true);
-    this.relatedScene.ball.setVelocity(-75, -300);
-    this.relatedScene.ballStartSound.play();
+  releaseBall () {
+    this.relatedScene.time.paused = false
+
+    this.relatedScene.ball.setData('glue', false)
+    this.relatedScene.ball.anims.play('ball_anim', true)
+    this.relatedScene.ball.setVelocity(-75, -300)
+    this.relatedScene.ballStartSound.play()
   }
 
-  handleLifeLoss() {
-    this.relatedScene.lostLifeSound.play();
+  handleLifeLoss () {
+    this.relatedScene.lostLifeSound.play()
+    this.relatedScene.time.paused = true
+    this.relatedScene.enemyLasers.clear(true, true)
 
     if (this.relatedScene.scoreboard.getLives() > 0) {
-      this.relatedScene.scoreboard.decrementLives();
-      this.resetBallAndShip();
+      this.relatedScene.scoreboard.decrementLives()
+      this.resetBallAndShip()
     }
   }
 
-  resetBallAndShip() {
-    this.relatedScene.scene.pause();
+  resetBallAndShip () {
+    this.relatedScene.scene.pause()
     setTimeout(() => {
-      this.relatedScene.ball.setX(this.relatedScene.millenium.x);
-      this.relatedScene.ball.setY(this.relatedScene.millenium.y - 36);
-      this.relatedScene.ball.setData('glue', true);
-      this.relatedScene.ball.setVelocity(0, 0);
-      this.relatedScene.ball.anims.stop();
-      this.relatedScene.scene.resume();
-    }, 2000);
+      this.relatedScene.ball.setX(this.relatedScene.millenium.x)
+      this.relatedScene.ball.setY(this.relatedScene.millenium.y - 36)
+      this.relatedScene.ball.setData('glue', true)
+      this.relatedScene.ball.setVelocity(0, 0)
+      this.relatedScene.ball.anims.stop()
+      this.relatedScene.scene.resume()
+    }, 2000)
   }
 }
