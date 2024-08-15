@@ -111,6 +111,7 @@ export class Level1_Boss extends Scene {
   }
 
   update () {
+    console.log(this.registry.get('lives'))
     if (this.updating) {
       this.inputs.update()
       this.scoreboard.update()
@@ -128,7 +129,7 @@ export class Level1_Boss extends Scene {
       console.log(this.death_star.getData('health'))
       if (this.bricks.countActive() === 0) {
         this.updating = false
-        this.scoreboard.incrementScoreByTime(this, 50)
+        this.scoreboard.incrementScoreByTime(this, 50, this.registry.get('lives'))
       }
     } else if (!this.introActive) {
       // stop all animations

@@ -84,9 +84,10 @@ export class Scoreboard {
     return this.score
   }
 
-  incrementScoreByTime (relatedScene, points) {
+  incrementScoreByTime (relatedScene, points, lives = null) {
     this.relatedScene = relatedScene
     let remainingTime = this.timer.repeatCount
+    let countLives = Boolean(lives)
 
     this.timer = this.relatedScene.time.addEvent({
       delay: 10,
@@ -99,6 +100,33 @@ export class Scoreboard {
           this.textTimer.setText('Time: ' + remainingTime)
         } else {
           this.timer.remove()
+          if (countLives) {
+            countLives = false
+            this.addLifePoints(lives)
+          } else {
+            this.relatedScene.scene.updating = true
+          }
+        }
+      },
+      callbackScope: this,
+      loop: true
+    })
+  }
+
+  addLifePoints (lives) {
+    this.timer2 = this.relatedScene.time.addEvent({
+      delay: 500,
+      callback: () => {
+        console.log('timer2', lives)
+        if (lives > 0) {
+          this.score += 1000
+          this.relatedScene.registry.set('score', this.score)
+          this.scoreText.setText('score: ' + this.score)
+          lives -= 1
+
+          this.decrementLives()
+        } else {
+          this.timer2.remove()
           this.relatedScene.scene.updating = true
         }
       },
