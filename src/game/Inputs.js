@@ -20,21 +20,28 @@ export class Inputs {
   update () {
     const cursorLeftIsDown = this.joystickExists ? this.relatedScene.joystickCursors.left.isDown : false
     const cursorRightIsDown = this.joystickExists ? this.relatedScene.joystickCursors.right.isDown : false
+    const cursorUpIsDown = this.joystickExists ? this.relatedScene.joystickCursors.up.isDown : false
+
+    let speed = 10
+
+    if (this.relatedScene.keys.up.isDown || cursorUpIsDown) {
+      speed = 15 // Incrementa la velocidad cuando se presiona hacia arriba
+    }
 
     if ((this.relatedScene.keys.left.isDown || cursorLeftIsDown) &&
       this.relatedScene.millenium.x > this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
-        this.relatedScene.ball.x -= 10
+        this.relatedScene.ball.x -= speed
       }
-      this.relatedScene.millenium.x -= 10
+      this.relatedScene.millenium.x -= speed
     } else if ((this.relatedScene.keys.right.isDown || cursorRightIsDown) &&
       this.relatedScene.millenium.x < this.relatedScene.game.config.width - this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
-        this.relatedScene.ball.x += 10
+        this.relatedScene.ball.x += speed
       }
-      this.relatedScene.millenium.x += 10
+      this.relatedScene.millenium.x += speed
     } else {
       this.relatedScene.millenium.setFrame(0)
     }

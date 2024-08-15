@@ -61,6 +61,7 @@ export class Boot extends Scene {
     this.load.audio('vader_breath', 'sounds/VaderBreath.aac')
     this.load.audio('winner_sound', 'sounds/WinnerSong.aac')
     this.load.audio('explosion_sound', 'sounds/XWingExplode.aac')
+    this.load.audio('iamyourfather', 'sounds/Iamyourfather.aac')
 
     // Video
     this.load.video('intro', 'videos/Intro.mp4')

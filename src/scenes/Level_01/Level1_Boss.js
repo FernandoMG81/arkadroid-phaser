@@ -43,7 +43,7 @@ export class Level1_Boss extends Scene {
     this.ballStartSound = this.sound.add('ball_start', { volume: 0.3 })
     this.explosionSound = this.sound.add('explosion_sound', { volume: 0.3 })
     this.bounceSound = this.sound.add('bounce_sound', { volume: 0.3 })
-    this.lostLifeSound = this.sound.add('lost_life', { volume: 0.3 })
+    this.lostLifeSound = this.sound.add('iamyourfather', { volume: 0.3 })
     this.laser1Sound = this.sound.add('laser1_sound', { volume: 0.3 })
     this.tieLaserSound = this.sound.add('tie_laser_sound', { volume: 0.3 })
 

@@ -11,7 +11,6 @@ export class InputPanel extends Phaser.Scene {
 
   create () {
     const currentScore = this.registry.get('score')
-    console.log(currentScore)
     const rankings = loadRanking()
     const lowestRankingScore = rankings[rankings.length - 1]?.score || 0
 
@@ -70,7 +69,8 @@ export class InputPanel extends Phaser.Scene {
         //  Enter or Space
         if (cursor.x === 9 && cursor.y === 2 && name.length > 0) {
           //  Submit
-          saveRanking(name, this.playerScore)
+          saveRanking({ name, score: this.playerScore })
+          this.scene.start('GameOver')
         } else if (cursor.x === 8 && cursor.y === 2 && name.length > 0) {
           //  Rub
           //  Rub

@@ -6,7 +6,6 @@ export class MainMenu extends Scene {
   }
 
   create () {
-    console.log(this.game.registry.get('score'), this.game.registry.get('lives'))
     this.add.image(512, 384, 'background_menu').setDisplaySize(this.game.config.width, this.game.config.height)
     this.menuSound = this.sound.add('menu_music', { loop: true, volume: 0.3 })
     this.menuSound.play()
