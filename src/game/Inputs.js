@@ -2,40 +2,61 @@ export class Inputs {
   constructor (scene) {
     this.relatedScene = scene
 
-    // Verificar si el joystick existe
-    this.joystickExists = this.relatedScene.joystick !== undefined
-
-    // Agregar el botón de disparo solo si se está en un dispositivo móvil
+    // Agregar los botones de izquierda y derecha solo si se está en un dispositivo móvil
     if (this.relatedScene.sys.game.device.input.touch) {
-      this.fireButton = this.relatedScene.add.circle(this.relatedScene.game.config.width - 150, this.relatedScene.game.config.height - 350, 50, 0xDBE9F6).setAlpha(0.5)
-        .setInteractive().on('pointerdown', () => {
-          if (this.relatedScene.ball.getData('glue')) {
-            this.releaseBall()
-          }
+      // Botón para mover a la izquierda
+      this.leftButton = this.relatedScene.add.circle(100, this.relatedScene.game.config.height - 200, 50, 0xDBE9F6)
+        .setAlpha(0.5)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.isLeftButtonDown = true
+        })
+        .on('pointerup', () => {
+          this.isLeftButtonDown = false
+        })
+      this.leftButton.setScrollFactor(0)
+
+      // Botón para mover a la derecha
+      this.rightButton = this.relatedScene.add.circle(this.relatedScene.game.config.width - 100, this.relatedScene.game.config.height - 200, 50, 0xDBE9F6)
+        .setAlpha(0.5)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.isRightButtonDown = true
+        })
+        .on('pointerup', () => {
+          this.isRightButtonDown = false
+        })
+      this.rightButton.setScrollFactor(0)
+
+      // Botón de disparo
+      this.fireButton = this.relatedScene.add.circle(this.relatedScene.game.config.width - 100, this.relatedScene.game.config.height - 400, 50, 0x3599F4)
+        .setAlpha(0.5)
+        .setInteractive()
+        .on('pointerdown', () => {
+          this.isFireButtonDown = true
+        })
+        .on('pointerup', () => {
+          this.isFireButtonDown = false
         })
       this.fireButton.setScrollFactor(0)
     }
   }
 
   update () {
-    const cursorLeftIsDown = this.joystickExists ? this.relatedScene.joystickCursors.left.isDown : false
-    const cursorRightIsDown = this.joystickExists ? this.relatedScene.joystickCursors.right.isDown : false
-    const cursorUpIsDown = this.joystickExists ? this.relatedScene.joystickCursors.up.isDown : false
-
     let speed = 10
 
-    if (this.relatedScene.keys.up.isDown || cursorUpIsDown) {
+    if (this.relatedScene.keys.up.isDown) {
       speed = 15 // Incrementa la velocidad cuando se presiona hacia arriba
     }
 
-    if ((this.relatedScene.keys.left.isDown || cursorLeftIsDown) &&
+    if ((this.relatedScene.keys.left.isDown || this.isLeftButtonDown) &&
       this.relatedScene.millenium.x > this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
         this.relatedScene.ball.x -= speed
       }
       this.relatedScene.millenium.x -= speed
-    } else if ((this.relatedScene.keys.right.isDown || cursorRightIsDown) &&
+    } else if ((this.relatedScene.keys.right.isDown || this.isRightButtonDown) &&
       this.relatedScene.millenium.x < this.relatedScene.game.config.width - this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
@@ -46,7 +67,7 @@ export class Inputs {
       this.relatedScene.millenium.setFrame(0)
     }
 
-    if (this.relatedScene.keys.space.isDown) {
+    if (this.relatedScene.keys.space.isDown || this.isFireButtonDown) {
       if (this.relatedScene.ball.getData('glue')) {
         this.releaseBall()
       }
@@ -67,7 +88,6 @@ export class Inputs {
 
   releaseBall () {
     this.relatedScene.time.paused = false
-
     this.relatedScene.ball.setData('glue', false)
     this.relatedScene.ball.anims.play('ball_anim', true)
     this.relatedScene.ball.setVelocity(-75, -300)

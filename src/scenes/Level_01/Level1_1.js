@@ -23,19 +23,6 @@ export class Level1_1 extends Scene {
       .setDisplaySize(this.game.config.width, this.game.config.height)
       .setAlpha(0.5)
 
-    /** Mobile Joystick */
-    const isMobile = !this.sys.game.device.os.desktop
-
-    if (isMobile) {
-      this.joystick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-        x: 150,
-        y: this.game.config.height - 300,
-        radius: 100,
-        base: this.add.circle(0, 0, 50, 0x277CC9, 0.5),
-        thumb: this.add.circle(0, 0, 25, 0xcccccc, 0.5)
-      })
-    }
-
     /** Sounds */
     this.soundLevel = this.sound.add('level1_music', { loop: true, volume: 0.3 })
     this.soundLevel.play()
@@ -91,7 +78,6 @@ export class Level1_1 extends Scene {
 
     /** Inputs */
     this.keys = this.input.keyboard.createCursorKeys()
-    this.joystickCursors = this.joystick !== undefined ? this.joystick.createCursorKeys() : undefined
     this.inputs = new Inputs(this)
 
     /** Random Enemy Shooting */

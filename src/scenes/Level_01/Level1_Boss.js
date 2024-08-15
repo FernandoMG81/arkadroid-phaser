@@ -22,19 +22,6 @@ export class Level1_Boss extends Scene {
     this.add.image(512, 384, 'background_space_level')
       .setDisplaySize(this.game.config.width, this.game.config.height)
 
-    /** Mobile Joystick */
-    const isMobile = !this.sys.game.device.os.desktop
-
-    if (isMobile) {
-      this.joystick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-        x: 150,
-        y: this.game.config.height - 300,
-        radius: 100,
-        base: this.add.circle(0, 0, 50, 0x277CC9, 0.5),
-        thumb: this.add.circle(0, 0, 25, 0xcccccc, 0.5)
-      })
-    }
-
     /** Sounds */
     this.bossIntroSound = this.sound.add('darkside_sound', { volume: 0.3 })
     this.bossIntroSound.play()
@@ -91,7 +78,6 @@ export class Level1_Boss extends Scene {
 
       /** Inputs */
       this.keys = this.input.keyboard.createCursorKeys()
-      this.joystickCursors = this.joystick !== undefined ? this.joystick.createCursorKeys() : undefined
       this.inputs = new Inputs(this)
 
       this.shootEvent = createEnemyShot(this, Phaser.Math.Between(1000, 2000))
