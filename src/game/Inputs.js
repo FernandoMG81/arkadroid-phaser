@@ -1,16 +1,35 @@
 export class Inputs {
   constructor (scene) {
     this.relatedScene = scene
+
+    // Verificar si el joystick existe
+    this.joystickExists = this.relatedScene.joystick !== undefined
+
+    // Agregar el botón de disparo solo si se está en un dispositivo móvil
+    if (this.relatedScene.sys.game.device.input.touch) {
+      this.fireButton = this.relatedScene.add.circle(this.relatedScene.game.config.width - 150, this.relatedScene.game.config.height - 350, 50, 0xDBE9F6).setAlpha(0.5)
+        .setInteractive().on('pointerdown', () => {
+          if (this.relatedScene.ball.getData('glue')) {
+            this.releaseBall()
+          }
+        })
+      this.fireButton.setScrollFactor(0)
+    }
   }
 
   update () {
-    if (this.relatedScene.keys.left.isDown && this.relatedScene.millenium.x > this.relatedScene.millenium.width / 2) {
+    const cursorLeftIsDown = this.joystickExists ? this.relatedScene.joystickCursors.left.isDown : false
+    const cursorRightIsDown = this.joystickExists ? this.relatedScene.joystickCursors.right.isDown : false
+
+    if ((this.relatedScene.keys.left.isDown || cursorLeftIsDown) &&
+      this.relatedScene.millenium.x > this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
         this.relatedScene.ball.x -= 10
       }
       this.relatedScene.millenium.x -= 10
-    } else if (this.relatedScene.keys.right.isDown && this.relatedScene.millenium.x < this.relatedScene.game.config.width - this.relatedScene.millenium.width / 2) {
+    } else if ((this.relatedScene.keys.right.isDown || cursorRightIsDown) &&
+      this.relatedScene.millenium.x < this.relatedScene.game.config.width - this.relatedScene.millenium.width / 2) {
       this.relatedScene.millenium.setFrame(1)
       if (this.relatedScene.ball.getData('glue')) {
         this.relatedScene.ball.x += 10
