@@ -15,7 +15,7 @@ export class Manual extends Scene {
 
     this.video.play(true)
 
-    this.exit = this.add.text(100, 60, '# volver', { fontFamily: 'starjedi', fontSize: '32px', fill: '#fae41e' }).setInteractive()
+    this.exit = this.add.text(100, 60, '# return', { fontFamily: 'starjedi', fontSize: '32px', fill: '#E2B426' }).setInteractive()
 
     // cambiar color al hacer hover
     this.exit.on('pointerover', () => {
@@ -23,7 +23,7 @@ export class Manual extends Scene {
     })
 
     this.exit.on('pointerout', () => {
-      this.exit.setFill('#fae41e')
+      this.exit.setFill('#E2B426')
     })
 
     // si se apreta esc tambien vuelve al menu

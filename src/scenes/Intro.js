@@ -10,7 +10,7 @@ export class Intro extends Scene {
     intro.play().setVolume(0.3)
 
     // Crear el texto intermitente
-    const skipText = this.add.text(this.cameras.main.centerX, this.cameras.main.height - 50, 'click o barra espaciadora para saltar', {
+    const skipText = this.add.text(this.cameras.main.centerX, this.cameras.main.height - 50, 'Click or spacebar to skip', {
       fontFamily: 'starjedi',
       fontSize: '18px',
       color: '#ffffff'

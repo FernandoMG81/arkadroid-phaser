@@ -21,7 +21,7 @@ export class Scoreboard {
     this.scoreText = this.relatedScene.add.text(70, 20, 'score: ' + this.score, {
       fontFamily: 'starjedi',
       fontSize: '32px',
-      fill: '#fae41e',
+      fill: '#E2B426',
       // backgroundColor: '#000',
       padding: { x: 5, y: 10 }
 
@@ -47,7 +47,7 @@ export class Scoreboard {
     this.textTimer = this.relatedScene.add.text(this.relatedScene.game.config.width / 2, 20, `time: ${this.timer.repeatCount}`, {
       fontFamily: 'starjedi',
       fontSize: '32px',
-      fill: '#fae41e',
+      fill: '#E2B426',
       padding: { x: 5, y: 10 }
     }).setOrigin(0.5, 0)
   }

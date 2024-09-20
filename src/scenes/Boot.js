@@ -18,7 +18,7 @@ export class Boot extends Scene {
     this.load.image('background_space_level', 'assets/backgrounds/spaceLevel.png')
     this.load.image('background_death_star_level', 'assets/backgrounds/deathStarLevel2.png')
     this.load.image('background_menu', 'assets/backgrounds/menu.png')
-    this.load.image('manual', 'assets/instructions.png')
+    this.load.image('manual', 'assets/instructions-EN.png')
     this.load.video('background_manual', 'assets/backgrounds/manual.mp4', true)
     this.load.video('background_ranking', 'assets/backgrounds/ranking.mp4', true)
     this.load.video('background_millenium_panel', 'assets/backgrounds/millenium_panel.mp4')
@@ -64,7 +64,7 @@ export class Boot extends Scene {
     this.load.audio('iamyourfather', 'sounds/Iamyourfather.aac')
 
     // Video
-    this.load.video('intro', 'videos/Intro.mp4')
+    this.load.video('intro', 'videos/Intro-EN.mp4')
 
     // Others
     this.load.spritesheet('ball', 'assets/ball.png', { frameWidth: 32, frameHeight: 32 })
@@ -76,10 +76,10 @@ export class Boot extends Scene {
     this.load.bitmapFont('arcade', 'assets/fonts/arcade.png', 'assets/fonts/arcade.xml')
 
     // Buttons Menu
-    this.load.spritesheet('play_button', 'assets/menu/playButton.png', { frameWidth: 235, frameHeight: 59 })
-    this.load.spritesheet('manual_button', 'assets/menu/manualButton.png', { frameWidth: 235, frameHeight: 59 })
+    this.load.spritesheet('play_button', 'assets/menu/playButton-EN.png', { frameWidth: 235, frameHeight: 59 })
+    this.load.spritesheet('manual_button', 'assets/menu/manualButton-EN.png', { frameWidth: 235, frameHeight: 59 })
     this.load.spritesheet('exit_button', 'assets/menu/exitButton.png', { frameWidth: 235, frameHeight: 59 })
-    this.load.spritesheet('ranking_button', 'assets/menu/rankingButton.png', { frameWidth: 235, frameHeight: 59 })
+    this.load.spritesheet('ranking_button', 'assets/menu/rankingButton-EN.png', { frameWidth: 235, frameHeight: 59 })
   }
 
   create () {
